@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف خاصة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f6f3eb; /* بيج ناعم متناسق مع ثيم الزفاف */
+            font-family: 'Cairo', sans-serif;
+        }
+        /* شاشة البدء */
+        #start-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background-color: #f6f3eb;
+            padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        .invitation-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(90, 74, 58, 0.08);
+            border: 1px solid #eadecc;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .flower-icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+            color: #c5a880;
+            animation: float 3s ease-in-out infinite;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: #4a3e31;
+        }
+        p {
+            font-size: 15px;
+            color: #8c7b6a;
+            margin: 0 0 32px 0;
+            line-height: 1.7;
+        }
+        .btn {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 45px;
+            background-color: #c5a880;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(197, 168, 128, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+        .btn:hover {
+            background-color: #b3956b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(197, 168, 128, 0.6);
+        }
+        /* حاوية عرض الدعوة لملء الشاشة */
+        #invitation-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen">
+        <div class="invitation-card">
+            <div class="flower-icon">🌸</div>
+            <h1>دعوة زفاف خاصة</h1>
+            <p>يسعدنا حضوركم ومشاركتنا فرحتنا الكبرى.<br>اضغط أدناه لفتح الدعوة الموسيقية.</p>
+            <button onclick="openInvitation()" class="btn">
+                ✉️ فتح دعوة الزفاف
+            </button>
+        </div>
+    </div>
+
+    <div id="invitation-container">
+        <iframe id="canva-frame" src=""></iframe>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+    function openInvitation() {
+        // 1. تشغيل الموسيقى في الخلفية
+        var audio = document.getElementById("bg-music");
+        audio.play().catch(function(error) {
+            console.log("Audio playback failed:", error);
+        });
+
+        // 2. تعيين رابط موقع كانفا ليعمل بداخل الصفحة
+        var iframe = document.getElementById("canva-frame");
+        iframe.src = "https://my.canva.site/dahpgus5igq";
+
+        // 3. تأثير اختفاء شاشة البدء وظهور صفحة الدعوة بنعومة
+        var startScreen = document.getElementById("start-screen");
+        var container = document.getElementById("invitation-container");
+
+        startScreen.style.opacity = "0";
+        setTimeout(function() {
+            startScreen.style.display = "none";
+            container.style.display = "block";
+            setTimeout(function() {
+                container.style.opacity = "1";
+            }, 50);
+        }, 800);
+    }
+    </script>
+
+</body>
+</html>
