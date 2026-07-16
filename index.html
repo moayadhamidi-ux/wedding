@@ -144,8 +144,8 @@
             });
 
             // 2. تعيين رابط التضمين الذكي بعد معالجته ليعمل كـ Embed متجاوب
-            iframe.src = "https://www.canva.com/design/DAHPgbE2M90/U6ug97agChM8SEs32rQD9A/view?embed";
-
+            // 2. تعيين رابط المعاينة المباشرة للموقع لتجنب الأشرطة الرمادية والتجميد
+            iframe.src = "https://www.canva.com/design/DAHPgbE2M90/U6ug97agChM8SEs32rQD9A/preview";
             // 3. تأثير اختفاء شاشة البدء وظهور الدعوة
             startScreen.style.opacity = "0";
             container.style.display = "block";
