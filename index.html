@@ -86,18 +86,21 @@
         }
         /* حاوية عرض الدعوة لملء الشاشة */
         #invitation-container {
-            width: 100%;
-            height: 100%;
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-        iframe {
-            width: 100vw;
-            height: 100vh;
-            border: none;
-            display: block;
-        }
+    width: 100%;
+    height: 100vh;
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow-y: auto; /* يسمح بالتمرير العمودي بسلاسة داخل الحاوية */
+    -webkit-overflow-scrolling: touch; /* يضمن انسيابية التمرير على الآيفون والجوالات */
+}
+
+iframe {
+    width: 100%;
+    height: 100%; /* سيعتمد الآن على كامل ارتفاع حاوية الـ 100vh ليتناسب بدقة */
+    border: none;
+    display: block;
+}
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
