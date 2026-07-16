@@ -86,20 +86,26 @@
         }
         /* حاوية عرض الدعوة لملء الشاشة */
         #invitation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: none;
     opacity: 0;
     transition: opacity 1s ease;
-    overflow-y: auto; /* يسمح بالتمرير العمودي بسلاسة داخل الحاوية */
-    -webkit-overflow-scrolling: touch; /* يضمن انسيابية التمرير على الآيفون والجوالات */
+    z-index: 9999;
+    overflow: hidden; /* نمنع الحاوية الخارجية من التمرير لمنع التقطيع */
 }
 
 iframe {
     width: 100%;
-    height: 100%; /* سيعتمد الآن على كامل ارتفاع حاوية الـ 100vh ليتناسب بدقة */
+    height: 100%;
     border: none;
     display: block;
+    /* هذه الخصائص تجبر الآيفون والأندرويد على تفعيل التمرير الداخلي لكانفا */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; 
 }
         @keyframes float {
             0% { transform: translateY(0px); }
