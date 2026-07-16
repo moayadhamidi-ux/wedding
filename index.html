@@ -80,7 +80,7 @@
             box-shadow: 0 8px 25px rgba(197, 168, 128, 0.6);
         }
 
-        /* حاوية عرض الدعوة لملء الشاشة بالكامل */
+        /* حاوية عرض الدعوة لملء الشاشة بالكامل مع تفعيل التمرير للجوال */
         #invitation-container {
             position: fixed;
             top: 0;
@@ -91,17 +91,16 @@
             opacity: 0;
             transition: opacity 1s ease;
             z-index: 9999;
-            overflow: hidden; /* نمنع الحاوية الخارجية من التمرير لمنع التقطيع */
+            overflow-y: auto; /* يسمح بالتمرير العمودي داخل الحاوية */
+            -webkit-overflow-scrolling: touch; /* يضمن انسيابية الحركة على الآيفون والجوالات */
         }
 
-        /* الإطار الذي يعرض تصميم كانفا */
+        /* الإطار الذي يعرض تصميم كانفا متجاوباً */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch; /* يضمن انسيابية التمرير التام على الآيفون والجوالات */
         }
 
         @keyframes float {
@@ -124,7 +123,7 @@
 
     <!-- حاوية الإطار التي يظهر بداخلها تصميم كانفا -->
     <div id="invitation-container">
-        <iframe id="canva-frame" src="https://xn--ngbj5e.my.canva.site/dahpgbe2m90"></iframe>
+        <iframe id="canva-frame" src=""></iframe>
     </div>
 
     <!-- كود الصوت في الخلفية -->
@@ -144,7 +143,8 @@
                 console.log("Audio playback failed:", error);
             });
 
-            // 2. تعيين رابط تصميم كانفا الصحيح (view?embed)
+            // 2. تعيين رابط التضمين الذكي بعد معالجته ليعمل كـ Embed متجاوب
+            iframe.src = "https://www.canva.com/design/DAHPgbE2M90/U6ug97agChM8SEs32rQD9A/view?embed";
 
             // 3. تأثير اختفاء شاشة البدء وظهور الدعوة
             startScreen.style.opacity = "0";
