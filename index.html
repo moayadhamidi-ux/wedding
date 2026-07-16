@@ -2,111 +2,108 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دعوة زفاف خاصة</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
-        
+        /* إعدادات الخلفية العامة وتصفير الهوامش */
         * {
             box-sizing: border-box;
-        }
-        body, html {
             margin: 0;
             padding: 0;
+        }
+        body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #f6f3eb; /* بيج ناعم متناسق مع ثيم الزفاف */
             font-family: 'Cairo', sans-serif;
+            background-color: #f4f3ef;
         }
-        /* شاشة البدء */
+
+        /* شاشة البدء الترحيبية */
         #start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f0eb 0%, #e6ded7 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            background-color: #f6f3eb;
+            z-index: 10000;
+            transition: opacity 1s ease;
             padding: 20px;
-            transition: opacity 0.8s ease, visibility 0.8s;
         }
-        .invitation-card {
-            background: #ffffff;
+
+        .welcome-card {
+            background: white;
             padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(90, 74, 58, 0.08);
-            border: 1px solid #eadecc;
-            max-width: 420px;
-            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(197, 168, 128, 0.2);
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .flower-icon {
-            font-size: 45px;
-            margin-bottom: 20px;
-            color: #c5a880;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(197, 168, 128, 0.3);
             animation: float 3s ease-in-out infinite;
         }
+
         h1 {
+            color: #8c765c;
             font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            color: #4a3e31;
+            margin-bottom: 15px;
         }
+
         p {
-            font-size: 15px;
-            color: #8c7b6a;
-            margin: 0 0 32px 0;
-            line-height: 1.7;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
-        .btn {
-            font-size: 18px;
-            font-weight: 600;
-            padding: 15px 45px;
-            background-color: #c5a880;
+
+        .start-btn {
+            background-color: #8c765c;
             color: white;
             border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(197, 168, 128, 0.4);
             transition: all 0.3s ease;
-            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 5px 15px rgba(140, 118, 92, 0.3);
         }
-        .btn:hover {
-            background-color: #b3956b;
+
+        .start-btn:hover {
+            background-color: #735f49;
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(197, 168, 128, 0.6);
         }
-        /* حاوية عرض الدعوة لملء الشاشة */
-        #invitation-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    opacity: 0;
-    transition: opacity 1s ease;
-    z-index: 9999;
-    overflow: hidden; /* نمنع الحاوية الخارجية من التمرير لمنع التقطيع */
-}
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    /* هذه الخصائص تجبر الآيفون والأندرويد على تفعيل التمرير الداخلي لكانفا */
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; 
-}
+        /* حاوية عرض الدعوة لملء الشاشة بالكامل */
+        #invitation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+            z-index: 9999;
+            overflow: hidden; /* نمنع الحاوية الخارجية من التمرير لمنع التقطيع */
+        }
+
+        /* الإطار الذي يعرض تصميم كانفا */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch; /* يضمن انسيابية التمرير التام على الآيفون والجوالات */
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -116,50 +113,48 @@ iframe {
 </head>
 <body>
 
+    <!-- شاشة البدء الترحيبية لتفعيل الصوت -->
     <div id="start-screen">
-        <div class="invitation-card">
-            <div class="flower-icon">🌸</div>
+        <div class="welcome-card">
             <h1>دعوة زفاف خاصة</h1>
-            <p>يسعدنا حضوركم ومشاركتنا فرحتنا الكبرى.<br>اضغط أدناه لفتح الدعوة الموسيقية.</p>
-            <button onclick="openInvitation()" class="btn">
-                ✉️ فتح دعوة الزفاف
-            </button>
+            <p>يسعدنا ويشرفنا حضوركم لمشاركتنا هذه الفرحة الكبرى وسماع تفاصيل اللقاء.</p>
+            <button class="start-btn" id="start-button">فتح دعوة الزفاف</button>
         </div>
     </div>
 
+    <!-- حاوية الإطار التي يظهر بداخلها تصميم كانفا -->
     <div id="invitation-container">
         <iframe id="canva-frame" src=""></iframe>
     </div>
 
+    <!-- كود الصوت في الخلفية -->
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-    function openInvitation() {
-        // 1. تشغيل الموسيقى في الخلفية
-        var audio = document.getElementById("bg-music");
-        audio.play().catch(function(error) {
-            console.log("Audio playback failed:", error);
-        });
+        document.getElementById("start-button").addEventListener("click", function() {
+            var music = document.getElementById("bg-music");
+            var startScreen = document.getElementById("start-screen");
+            var container = document.getElementById("invitation-container");
+            var iframe = document.getElementById("canva-frame");
 
-        // 2. تعيين رابط موقع كانفا ليعمل بداخل الصفحة
-        var iframe = document.getElementById("canva-frame");
-        iframe.src = "https://www.canva.com/design/DAHPgbE2M90/U6ug97agChM8SEs32rQD9A/view?embed";
+            // 1. تشغيل الموسيقى
+            music.play().catch(function(error) {
+                console.log("Audio playback failed:", error);
+            });
 
-        // 3. تأثير اختفاء شاشة البدء وظهور صفحة الدعوة بنعومة
-        var startScreen = document.getElementById("start-screen");
-        var container = document.getElementById("invitation-container");
+            // 2. تعيين رابط تصميم كانفا الصحيح (view?embed)
+            iframe.src = "https://www.canva.com/design/DAHPgbE2M90/U6ug97agChM8SEs32rQD9A/view?embed";
 
-        startScreen.style.opacity = "0";
-        setTimeout(function() {
-            startScreen.style.display = "none";
+            // 3. تأثير اختفاء شاشة البدء وظهور الدعوة
+            startScreen.style.opacity = "0";
             container.style.display = "block";
             setTimeout(function() {
                 container.style.opacity = "1";
-            }, 50);
-        }, 800);
-    }
+                startScreen.style.display = "none";
+            }, 1000);
+        });
     </script>
 
 </body>
